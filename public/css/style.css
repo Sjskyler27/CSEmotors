@@ -44,7 +44,10 @@ body{
   padding-left: 30px;
   padding-right: 30px;
 }
-
+.main-nav a{
+  color:  var(--white);
+  text-decoration: none;
+}
 .main-nav ul {
   display: flex;
   justify-content: space-between;
@@ -161,7 +164,8 @@ footer p {
 
 @media screen and (min-width: 1100px) {
   html {
-    background-image: url("/public/images/site/small_check.jpg");
+    /* background-image: url("/public/images/site/small_check.jpg"); */
+    background-image: url("../images/site/small_check.jpg");
     /* Additional background properties */
   }
   body {

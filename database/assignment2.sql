@@ -40,12 +40,6 @@ CREATE TABLE IF NOT EXISTS public.account
     CONSTRAINT account_pkey PRIMARY KEY (account_id)
 );
 
-INSERT INTO public.classification (classification_name)
-VALUES ('Custom'),
-('Sport'),
-('SUV'),
-('Truck'),
-('Sedan');
 
 ALTER TABLE IF EXISTS public.inventory
 ADD CONSTRAINT fk_classification
