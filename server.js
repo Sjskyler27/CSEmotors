@@ -11,13 +11,13 @@ const host = process.env.HOST;
 
 
 app.use(require("./routes/static"));
-app.use("/inv", utilities.handleErrors(inventoryRoute))
 
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.set("layout", "./layouts/layout");
 
 // Index route
+app.use("/inv", utilities.handleErrors(inventoryRoute))
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
 app.use(async (req, res, next) =>{
