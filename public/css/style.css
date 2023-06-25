@@ -195,7 +195,21 @@ footer p {
   text-decoration: none;
 }
 
+/*detail page*/
 
+.info-wrapper{
+  padding: 20px;
+}
+.car-image{
+  padding-left: 40px;
+}
+.details li{
+  list-style-type: none;
+  padding: 5px
+}
+.details ul li:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.1);
+}
 /* END CONTENT */
 
 
@@ -240,6 +254,12 @@ footer p {
     grid-template-columns: repeat(3, 1fr);
 
   }
+
+  .info-wrapper{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
 }
 
 
@@ -254,4 +274,7 @@ footer p {
 
   }
 
+  .car-image{
+    padding-left: 100px;
+  }
 }

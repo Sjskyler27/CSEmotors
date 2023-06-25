@@ -83,7 +83,7 @@ Util.buildClassificationGrid = async function (data) {
     let infoPage = '<div id="info-wrapper" class="info-wrapper">'
     if (data.length > 0) {
       infoPage +=
-        '<img class="individual-image" src="' +
+        '<img class="car-image" src="' +
         data[0].inv_image +
         '" alt="Image of ' +
         data[0].inv_make +
