@@ -10,6 +10,7 @@ router.get("/", invController.buildManagement);
 router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:inv_id", invController.buildByVehicleInvId);
 router.get("/add-classification", invController.buildAddClassification);
+router.get("/add-inventory", invController.buildAddInventory);
 
 // post requests
 router.post(
@@ -17,6 +18,13 @@ router.post(
   validateInv.classRules(),
   validateInv.checkClass,
   utilities.handleErrors(invController.AddClassification)
+);
+
+router.post(
+  "/add-inventory",
+  validateInv.vehicleRules(),
+  validateInv.checkVehicleData,
+  utilities.handleErrors(invController.addInventory)
 );
 
 module.exports = router;

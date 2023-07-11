@@ -109,4 +109,78 @@ invCont.AddClassification = async function (req, res, next) {
   }
 };
 
+invCont.buildAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  let classDropDown = await utilities.buildClassDropdown();
+  try {
+    res.render("./inventory/add-inventory", {
+      title: "Add New Vehicle",
+      nav,
+      classDropDown,
+      errors: null,
+    });
+  } catch (error) {
+    error.status = 500;
+    console.error(error.status);
+    next(error);
+  }
+};
+
+invCont.addInventory = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  let classDropDown = await utilities.buildClassDropdown();
+  const {
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+
+  try {
+    const car = await invModel.addNewVehicle(
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
+    );
+    if (car) {
+      req.flash("notice", `You\'ve added another vehicle to the inventory`);
+      res.status(201).render("inventory/management", {
+        title: "Inventory Management",
+        nav,
+        classDropDown,
+        errors: null,
+      });
+    } else {
+      req.flash("error", "Check your information and try again.");
+      res.status(501).render("inventory/add-inventory", {
+        title: "Add New Vehicle",
+        nav,
+        classDropDown,
+        errors: null,
+      });
+    }
+  } catch (error) {
+    req.flash("error", "Sorry, we could not proccess your request.");
+    res.status(500).render("inventory/add-inventory", {
+      title: "Add New Vehicle",
+      nav,
+      classDropDown,
+      errors: null,
+    });
+  }
+};
+
 module.exports = invCont;
