@@ -1,4 +1,4 @@
-const pool = require("../database/")
+const pool = require("../database/");
 
 /* ***************************
  *  Get all classification data
@@ -6,7 +6,7 @@ const pool = require("../database/")
 async function getClassifications() {
   return await pool.query(
     "SELECT * FROM public.classification ORDER BY classification_name"
-  )
+  );
 }
 
 /* ***************************
@@ -20,10 +20,10 @@ async function getInventoryByClassificationId(classification_id) {
       ON i.classification_id = c.classification_id 
       WHERE i.classification_id = $1`,
       [classification_id]
-    )
-    return data.rows
+    );
+    return data.rows;
   } catch (error) {
-    console.error("getclassificationsbyid error " + error)
+    console.error("getclassificationsbyid error " + error);
   }
 }
 
@@ -32,15 +32,26 @@ async function getVehicleByInvId(inventory_id) {
     const data = await pool.query(
       "SELECT * FROM public.inventory as i WHERE i.inv_id = $1",
       [inventory_id]
-    )
-    return data.rows
+    );
+    return data.rows;
   } catch (error) {
-    console.error("getvehiclebyinvid error " + error)
+    console.error("getvehiclebyinvid error " + error);
+  }
+}
+// for the management to add a new classification type
+async function addNewClassification(classification_name) {
+  try {
+    const sql =
+      "INSERT INTO classification(classification_name)VALUES ($1) RETURNING *";
+    return await pool.query(sql, [classification_name]);
+  } catch (error) {
+    return error.message;
   }
 }
 
 module.exports = {
   getClassifications,
+  addNewClassification,
   getInventoryByClassificationId,
   getVehicleByInvId,
-}
+};

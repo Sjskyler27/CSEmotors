@@ -1,0 +1,28 @@
+<!-- Content heading -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %> <% if (errors) { %>
+<ul class="error">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<div class="add-class-body">
+  <p>Field Is Required</p>
+  <form action="/inv/add-classification" method="post" class="account-form">
+    <label for="classification_name">Classification Name:</label>
+
+    <input
+      type="text"
+      id="classification_name"
+      name="classification_name"
+      class="input"
+      pattern="^[A-Za-z]+$"
+      required
+    />
+    <span>NAME MUST BE ALPHABETIC CHARECTERS ONLY.</span>
+    <button type="submit" class="form-button">Add Classification</button>
+  </form>
+</div>
