@@ -39,14 +39,14 @@ body {
 /* nav */
 
 .items {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
   background-color: var(--black);
   color: var(--white);
   padding: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
+}
+.itemul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 .main-nav a {
@@ -316,6 +316,18 @@ h1 {
   background-color: var(--green);
 }
 
+.remove-button {
+  padding: 10px 20px;
+  background-color: var(--red);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  background-color: var(--black);
+}
 .error {
   color: var(--red);
   margin-bottom: 10px;

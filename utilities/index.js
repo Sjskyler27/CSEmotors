@@ -8,7 +8,7 @@ const Util = {};
  ************************** */
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications();
-  let list = "<ul>";
+  let list = '<ul class = "itemul">';
   list += '<li><a href="/" title="Home page">Home</a></li>';
   data.rows.forEach((row) => {
     list += "<li>";
@@ -161,6 +161,7 @@ Util.buildWatchList = async function (data) {
         "<span class='inv-price'>$" +
         new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
         "</span>";
+      watchlist += "<br><button class=remove-button>Remove</button>";
       watchlist += "</div>";
       watchlist += "</li>";
     });
