@@ -5,4 +5,9 @@ const utilities = require("../utilities");
 
 router.get("/", watchlistController.buildWatchlistBylocal);
 
+router.get(
+  "/remove/:id",
+  utilities.handleErrors(watchlistController.processRemove)
+);
+
 module.exports = router;

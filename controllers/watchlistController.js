@@ -1,17 +1,16 @@
-const invModel = require("../models/watchlist-model");
+const watchlistModel = require("../models/watchlist-model");
 const utilities = require("../utilities/");
 
-const invCont = {};
+const watchCont = {};
 
 /* ***************************
  *  Build inventory by classification view
  * ************************** */
-invCont.buildWatchlistBylocal = async function (req, res, next) {
-  console.log("building watchlist");
+watchCont.buildWatchlistBylocal = async function (req, res, next) {
   try {
-    const data = await invModel.getInventoryFromWatchlist(); // build inventory based off new table based based on getInventoryByClassificationId
+    const data = await watchlistModel.getInventoryFromWatchlist();
     let nav = await utilities.getNav();
-    const watchlist = await utilities.buildWatchList(data); // expects similar to buildByClassificationId
+    const watchlist = await utilities.buildWatchList(data);
     res.render("./watchlist/watchlist", {
       title: "Watchlist",
       nav,
@@ -25,4 +24,11 @@ invCont.buildWatchlistBylocal = async function (req, res, next) {
   }
 };
 
-module.exports = invCont;
+watchCont.processRemove = async function (req, res, next) {
+  let w_id = req.params.id;
+  console.log(`removing ${w_id} from watchlist`);
+  const data = await watchlistModel.removeFromWatchlist(w_id);
+  res.redirect("../");
+};
+
+module.exports = watchCont;

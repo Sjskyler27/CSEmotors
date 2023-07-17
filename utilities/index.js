@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model");
+const watchlistModel = require("../models/watchlist-model");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const Util = {};
@@ -69,6 +70,7 @@ Util.buildClassificationGrid = async function (data) {
         "<span class='inv-price'>$" +
         new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
         "</span>";
+      grid += "<br><button class=form-button >Add to watchlist</button>";
       grid += "</div>";
       grid += "</li>";
     });
@@ -123,6 +125,7 @@ Util.buildVehicleInfo = async function (data) {
 // make watchlist view
 Util.buildWatchList = async function (data) {
   let watchlist;
+  let w_id = 1;
   if (data.length > 0) {
     watchlist = '<ul id="watchlist-display" class="inv-display">';
     data.forEach((vehicle) => {
@@ -161,9 +164,13 @@ Util.buildWatchList = async function (data) {
         "<span class='inv-price'>$" +
         new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
         "</span>";
-      watchlist += "<br><button class=remove-button>Remove</button>";
+      watchlist +=
+        "<br><br><a class=remove-button href=./remove/" +
+        vehicle.inv_id +
+        ">Remove</a>";
       watchlist += "</div>";
       watchlist += "</li>";
+      w_id = w_id + 1;
     });
     watchlist += "</ul>";
   } else {
