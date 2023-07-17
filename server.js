@@ -6,6 +6,7 @@ const expressLayouts = require("express-ejs-layouts");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRouter");
 const accountRoute = require("./routes/accountRouter");
+const watchlistRoute = require("./routes/watchlistRouter");
 const session = require("express-session");
 const flash = require("connect-flash");
 const bodyParser = require("body-parser");
@@ -46,6 +47,7 @@ app.use(cookieParser());
 app.use(utilities.checkJWTToken);
 app.use("/account", utilities.handleErrors(accountRoute));
 app.use("/inv", utilities.handleErrors(inventoryRoute));
+app.use("/watchlist", utilities.handleErrors(watchlistRoute));
 app.get("/", utilities.handleErrors(baseController.buildHome));
 
 app.use(async (req, res, next) => {

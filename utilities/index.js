@@ -120,6 +120,57 @@ Util.buildVehicleInfo = async function (data) {
   return infoPage;
 };
 
+// make watchlist view
+Util.buildWatchList = async function (data) {
+  let watchlist;
+  if (data.length > 0) {
+    watchlist = '<ul id="watchlist-display" class="inv-display">';
+    data.forEach((vehicle) => {
+      watchlist += "<li>";
+      watchlist +=
+        '<a href="../../inv/detail/' +
+        vehicle.inv_id +
+        '" title="View ' +
+        vehicle.inv_make +
+        " " +
+        vehicle.inv_model +
+        'details"><img src="' +
+        vehicle.inv_thumbnail +
+        '" alt="Image of ' +
+        vehicle.inv_make +
+        " " +
+        vehicle.inv_model +
+        ' on CSE Motors" /></a>';
+      watchlist += '<div class="namePrice">';
+      watchlist += "<hr />";
+      watchlist += "<h2>";
+      watchlist +=
+        '<a href="../../inv/detail/' +
+        vehicle.inv_id +
+        '" title="View ' +
+        vehicle.inv_make +
+        " " +
+        vehicle.inv_model +
+        ' details" class="inv-link">' +
+        vehicle.inv_make +
+        " " +
+        vehicle.inv_model +
+        "</a>";
+      watchlist += "</h2>";
+      watchlist +=
+        "<span class='inv-price'>$" +
+        new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
+        "</span>";
+      watchlist += "</div>";
+      watchlist += "</li>";
+    });
+    watchlist += "</ul>";
+  } else {
+    watchlist += '<p class="notice">Add vehicles to your watchlist!</p>';
+  }
+  return watchlist;
+};
+
 Util.buildClassDropdown = async function (classification_id) {
   let classes = await invModel.getClassifications();
 
