@@ -31,4 +31,11 @@ watchCont.processRemove = async function (req, res, next) {
   res.redirect("../");
 };
 
+watchCont.processAdd = async function (req, res, next) {
+  let w_id = req.params.id;
+  console.log(`adding ${w_id} to watchlist`);
+  const data = await watchlistModel.addToWatchlist(w_id);
+  res.redirect("../../../watchlist/");
+};
+
 module.exports = watchCont;

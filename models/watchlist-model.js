@@ -21,18 +21,15 @@ async function getInventoryFromWatchlist() {
 /* ***************************
  *  add an item to the watchlist
  * ************************** */
-async function addToWatchlist() {
+async function addToWatchlist(inv_id) {
   try {
-    const data = await pool.query(
-      `SELECT i.*
-        FROM public.inventory AS i
-        JOIN public.watchlist AS w
-        ON i.inv_id = w.inv_id`
+    const addedItem = await pool.query(
+      `INSERT INTO public.watchlist (inv_id) VALUES ($1) RETURNING *`,
+      [inv_id]
     );
-    console.log(data.rows);
-    return data.rows;
+    return addedItem.rows[0];
   } catch (error) {
-    console.error("getInventoryFromWatchlist error: " + error);
+    console.error("addToWatchlist error: " + error);
   }
 }
 

@@ -70,7 +70,10 @@ Util.buildClassificationGrid = async function (data) {
         "<span class='inv-price'>$" +
         new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
         "</span>";
-      grid += "<br><button class=form-button >Add to watchlist</button>";
+      grid +=
+        "<br><br><a class=add-button href=../../watchlist/add/" +
+        vehicle.inv_id +
+        ">Add to watchlist</a>";
       grid += "</div>";
       grid += "</li>";
     });

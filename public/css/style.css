@@ -330,6 +330,20 @@ h1 {
 .remove-button:hover {
   background-color: var(--black);
 }
+.add-button {
+  padding: 5px 10px;
+  margin-top: 30px;
+  background-color: var(--green);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.add-button:hover {
+  background-color: rgb(4, 159, 4);
+}
 .error {
   color: var(--red);
   margin-bottom: 10px;

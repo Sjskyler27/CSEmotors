@@ -9,5 +9,6 @@ router.get(
   "/remove/:id",
   utilities.handleErrors(watchlistController.processRemove)
 );
+router.get("/add/:id", utilities.handleErrors(watchlistController.processAdd));
 
 module.exports = router;
