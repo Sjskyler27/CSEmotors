@@ -33,7 +33,7 @@ validate.registrationRules = () => {
       .trim()
       .isStrongPassword({
         // password requirmeants
-        minLength: 8,
+        minLength: 12,
         minLowercase: 1,
         minUppercase: 1,
         minNumbers: 1,
@@ -77,7 +77,7 @@ validate.updatePassRules = () => {
     body("account_password")
       .trim()
       .isStrongPassword({
-        minLength: 8,
+        minLength: 12,
         minLowercase: 1,
         minUppercase: 1,
         minNumbers: 1,
@@ -160,7 +160,7 @@ validate.loginRules = () => {
     body("account_password")
       .trim()
       .isStrongPassword({
-        minLength: 8,
+        minLength: 12,
         minLowercase: 1,
         minUppercase: 1,
         minNumbers: 1,
