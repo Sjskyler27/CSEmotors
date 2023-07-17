@@ -5,12 +5,14 @@ const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRouter");
+const accountRoute = require("./routes/accountRoute");
 const session = require("express-session");
 const flash = require("connect-flash");
 const bodyParser = require("body-parser");
 const pool = require("./database/");
 const port = process.env.PORT;
 const host = process.env.HOST;
+const cookieParser = require("cookie-parser");
 
 app.use(require("./routes/static"));
 
@@ -40,9 +42,11 @@ app.set("layout", "./layouts/layout");
 app.use(flash());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(cookieParser());
+app.use(utilities.checkJWTToken);
 // Index route
 app.use("/inv", utilities.handleErrors(inventoryRoute));
+app.use("/account", utilities.handleErrors(accountRoute));
 app.get("/", utilities.handleErrors(baseController.buildHome));
 
 app.use(async (req, res, next) => {

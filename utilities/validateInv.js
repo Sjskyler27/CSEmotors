@@ -119,4 +119,44 @@ validate.checkVehicleData = async (req, res, next) => {
   next();
 };
 
+validate.checkUpdateData = async (req, res, next) => {
+  const {
+    inv_price,
+    inv_miles,
+    classification_id,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_color,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_id,
+  } = req.body;
+  let errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    let classDropDown = await utilities.buildClassDropdown();
+    res.render("inventory/edit-inventory", {
+      errors,
+      title: "Edit: " + inv_make + " " + inv_model,
+      nav,
+      classDropDown,
+      inv_price,
+      inv_miles,
+      classification_id,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_color,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_id,
+    });
+    return;
+  }
+  next();
+};
+
 module.exports = validate;
